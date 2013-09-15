@@ -6,6 +6,6 @@
                  [jayq "1.0.0"]
                  [fetch "0.1.0-alpha2" :exclusions [org.clojure/clojure]]
                  [crate "0.2.3"]
-                 [noir "1.3.0"]]
+                 [lib-noir "0.6.8"]]
   :cljsbuild {:builds [{}]}
   :main ^{:skip-aot true} fair-pairs.server)
