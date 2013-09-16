@@ -6,7 +6,7 @@
 (defpartial layout [& content]
             (html5
               [:head
-               [:title "fair-pairs"]
+               [:title "Fair Pairs"]
                (include-css "/css/reset.css")
                (include-css "/css/default.css")]
               [:body

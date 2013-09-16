@@ -1,6 +1,28 @@
 body { padding: 75px 80px; background: #454545; color: #b2b2b2; font-family: "Helvetica Neue", "Verdana", sans-serif;}
-a {text-decoration:none; color: #b2b2b2; }
+a { text-decoration:none; color: #b2b2b2; }
 
 #wrapper { margin:auto; width: 1024px; }
 
 .alert { border-radius:10px; background: #3f634d; border: 2px solid #3c8455; padding: 15px; }
+
+h3 { font-size: 200%; }
+
+#setup li {
+  color: black;
+  list-style-type: none;
+  display: inline-block;
+  background-color: rgb(120, 140, 255);
+  border-radius: 0.5em;
+  opacity: 0.8;
+  margin: 4px;
+  padding: 8px;
+}
+
+article {
+  border: 2px solid blue;
+  width: 768px;
+}
+
+section {
+  border: 1px solid black;
+}
