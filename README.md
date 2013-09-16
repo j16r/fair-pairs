@@ -1,6 +1,6 @@
 # fair-pairs
 
-A website written with Noir and ClojureScript.
+A small clojurescript website which helps teams pick who's pairing for the day.
 
 ## Usage
 
@@ -11,8 +11,7 @@ lein run
 
 ## License
 
-Copyright (C) 2012 FIXME
+Copyright (C) 2013 John Barker.
 
 Distributed under the Eclipse Public License, the same as Clojure.
-
 
