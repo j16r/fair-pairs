@@ -49,7 +49,9 @@
 
 (defpartial history [pairs]
   [:ul
-   [:li "John Barker + Liz Starin"]])
+   [:li 
+    [:span "Jake"]
+    [:span "Finn"]]])
 
 (delegate $body :.anchor :click
     (fn [event] (anchor-participant event)))

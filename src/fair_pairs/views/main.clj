@@ -6,15 +6,22 @@
 
 (defpage "/participants" []
   (response/json
-   [{:name "John Barker"}
-    {:name "Zack Parness"}
-    {:name "Johny Urgiles"}
-    {:name "Liz Starin"}
-    {:name "Rich Rosen"}
-    {:name "James Pothen"}
-    {:name "Scott Rogers"}
-    {:name "Dave Cameron"}
-    {:name "Doug McClurg"}]))
+   [{:name "Jake"}
+    {:name "Finn"}
+    {:name "Ice King"}
+    {:name "Princess Bubblegum"}
+    {:name "Laidy Rainicorn"}
+    {:name "Marceline"}
+    {:name "LSP"}
+    {:name "Beemo"}
+    {:name "Gunter"}
+    {:name "Earl of Lemongrab"}
+    {:name "Flame Princess"}
+    {:name "Peppermint Butler"}
+    {:name "Tree Trunks"}
+    {:name "Fionna"}
+    {:name "Cake"}
+    {:name "Me-Mow"}]))
 
 (defpage [:post "/participants"] {:keys [name]}
   (response/status 201))
