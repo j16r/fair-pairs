@@ -10,7 +10,7 @@
     {:name "Finn"}
     {:name "Ice King"}
     {:name "Princess Bubblegum"}
-    {:name "Laidy Rainicorn"}
+    {:name "Lady Rainicorn"}
     {:name "Marceline"}
     {:name "LSP"}
     {:name "Beemo"}
@@ -33,16 +33,29 @@
 (defpage "/" []
          (common/layout
            [:article
-            [:h3 "Today's Pairs"]
-            [:section#pairs]
-            [:h3 "Available Pairs"]
+            [:section#today
+              [:h3 "Today's Pairs"]
+              [:section#pairs]
+              [:div.clear]
+              [:h4 "Soloing"]
+              [:ul#cowboys]
+              [:div.clear]
+              [:h4 "Absent"]
+              [:ul#sickies]
+              [:div.clear]]
+            [:div.clear]
+            [:h3 "Available"]
             [:section#setup
-             [:section]
-             [:section#participants]]
-            [:h3 "Pair History"]
-            [:section#history]
+             [:section
+              [:ul#participants]
+              [:div.clear]]]
+            [:div.clear]
+            [:h3 "History"]
+            [:section
+             [:ul#history]
+             [:div.clear]]
             [:footer
              [:fieldset#control
-              [:label {:for "pair"} "Pair name:"]
+              [:label {:for "pair"} "Name:"]
               [:input#pair]
               [:button#add_pair "Add"]]]]))

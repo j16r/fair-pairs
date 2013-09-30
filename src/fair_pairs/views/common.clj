@@ -8,7 +8,8 @@
               [:head
                [:title "Fair Pairs"]
                (include-css "/css/reset.css")
-               (include-css "/css/default.css")]
+               (include-css "/css/default.css")
+               (include-css "/css/font-awesome.min.css")]
               [:body
                [:div#wrapper
                 content]

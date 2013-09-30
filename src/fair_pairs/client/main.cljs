@@ -5,7 +5,7 @@
             [jayq.core :as jq])
   (:use [jayq.core :only [$ append delegate bind alert]]
         [jayq.util :only [log]])
-  (:use-macros 
+  (:use-macros
     [jayq.macros :only [let-ajax ready]]
     [crate.def-macros :only [defpartial]]))
 
@@ -24,42 +24,80 @@
 (def $history ($ :#history))
 (def $setup ($ :#setup))
 (def $participant-name ($ :#pair))
+(def $pairs ($ :#pairs))
+(def $participants ($ :#participants))
+(def $sickies ($ :#sickies))
+(def $cowboys ($ :#cowboys))
 
+; Shuffling participants around
+(defn anchor-participant [$participant]
+  (.append $pairs
+           (.append ($ "<li>")
+                    (.addClass (.detach $participant) "anchor"))))
+
+(defn pair-participant [$participant]
+  (let [$participant (.detach $participant)
+        $first-available-pair ($ "#pairs > li:not(.paired):first")]
+    (if (= (aget $first-available-pair "length") 1)
+      (-> $first-available-pair
+        (.addClass "paired")
+        (.append $participant))
+      (.append $pairs (.append ($ "<li>") $participant)))))
+
+(defn unpair-participant [$participant]
+  (let [$container (.parent $participant "li")]
+    (.append $participants (.detach $participant))
+    (if (.hasClass $container "paired")
+      (.removeClass $container "paired")
+      (.remove $container))))
+
+(defn solo-participant [$participant]
+  (.append $cowboys (.detach $participant)))
+
+(defn absent-participant [$participant]
+  (.append $sickies (.detach $participant)))
+
+; Adding a participant
 (defn add-participant [name]
-  (log "Adding participant")
   (jq/ajax {:method "POST"
             :url "/participants"
             :success (fn [xhr] )}))
-(defn anchor-participant [event]
-  (log "Anchoring participant")
-  (log (.remove (.closest ($ (aget event "target") :li)))))
-(defn pair-participant [name]
-  )
-(defn solo-participant [name]
-  )
 
+
+; Partials
+(defpartial participant [participant]
+  [:li.participant (aget participant "name")
+   [:i.anchor.icon-anchor.icon-2x]
+   [:i.pair.icon-group.icon-2x]
+   [:i.solo.icon-user.icon-2x]
+   [:i.absent.icon-beer.icon-2x]
+   [:i.unpair.icon-remove.icon-2x]])
 (defpartial setup [participants]
    [:ul
-    (map (fn [participant]
-           [:li (aget participant "name")
-            [:button.anchor "Anchor"]
-            [:button.pair "Pair"]
-            [:button.solo "Solo"]])
-         participants)])
-
+    (map participant participants)])
 (defpartial history [pairs]
-  [:ul
-   [:li 
-    [:span "Jake"]
-    [:span "Finn"]]])
+  [:li
+   [:span "Jake"]
+   [:span "Finn"]])
 
-(delegate $body :.anchor :click
-    (fn [event] (anchor-participant event)))
-(delegate $body :.pair :click
-    (fn [event] (pair-participant event)))
-(delegate $body :.solo :click
-    (fn [event] (solo-participant event)))
+; Event handlers
+(defn participant-event-handler [handler]
+  (fn [event]
+    (do
+      (.preventDefault event)
+      (handler (.closest ($ (aget event "target")) ".participant")))))
+(delegate $body "#setup .anchor" :click
+          (participant-event-handler anchor-participant))
+(delegate $body "#setup .pair" :click
+          (participant-event-handler pair-participant))
+(delegate $body "#setup .solo" :click
+          (participant-event-handler solo-participant))
+(delegate $body "#pairs .unpair" :click
+          (participant-event-handler unpair-participant))
+(delegate $body "#pairs .absent" :click
+          (participant-event-handler absent-participant))
 
+; DOM ready
 (ready
   (bind ($ :#add_pair) :click
         (fn [event] (add-participant (.val $participant-name))))
