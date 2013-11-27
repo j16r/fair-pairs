@@ -1,6 +1,6 @@
 (defproject fair-pairs "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://exampl.com/FIXME"
+  :description "Fair pairs"
+  :url "http://github.com/excepttheweasel/fair-pairs"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [noir-cljs "0.3.7"]
                  [jayq "2.4.0"]
